@@ -7,7 +7,7 @@ final List<Menu> menuList = [
     kategori: ["Makanan", "Nasi", "Spesial"],
     price: "25000",
     imageassets: [
-      "assets/images/nasigoreng1.png",
+      "assets/images/nasigoreng1.jpg",
     ],
   ),
   Menu(
@@ -16,7 +16,7 @@ final List<Menu> menuList = [
     kategori: ["Minuman", "Dingin"],
     price: "5000",
     imageassets: [
-      "assets/images/esteh1.png",
+      "assets/images/esteh1.jpg",
     ],
   ),
   Menu(
@@ -25,7 +25,7 @@ final List<Menu> menuList = [
     kategori: ["Makanan", "Ayam", "Pedas"],
     price: "28000",
     imageassets: [
-      "assets/images/geprek1.png",
+      "assets/images/geprek1.jpg",
     ],
   ),
   Menu(
@@ -34,7 +34,7 @@ final List<Menu> menuList = [
     kategori: ["Makanan", "Mie"],
     price: "20000",
     imageassets: [
-      "assets/images/mieayam1.png",
+      "assets/images/mieayam1.jpg",
     ],
   ),
   Menu(
@@ -43,7 +43,7 @@ final List<Menu> menuList = [
     kategori: ["Minuman", "Jus"],
     price: "15000",
     imageassets: [
-      "assets/images/jusalpukat.png",
+      "assets/images/jusalpukat.jpg",
     ],
   ),
   Menu(
@@ -52,7 +52,7 @@ final List<Menu> menuList = [
     kategori: ["Makanan", "Daging", "Tradisional"],
     price: "30000",
     imageassets: [
-      "assets/images/sate.png",
+      "assets/images/sate.jpg",
     ],
   ),
 ];
