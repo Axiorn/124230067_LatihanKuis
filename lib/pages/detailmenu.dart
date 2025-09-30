@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latkuis_ppam/data/menudata.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPesan extends StatefulWidget {
   final int index;
@@ -30,6 +31,22 @@ class _DetailPesanState extends State<DetailPesan> {
     });
   }
 
+  Future<void> _launchWhatsApp(String phone, String message) async {
+    final Uri url = Uri.parse(
+      "https://wa.me/$phone?text=${Uri.encodeComponent(message)}",
+    );
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch WhatsApp');
+    }
+  }
+
+  Future<void> _launchPhone(String phone) async {
+    final Uri url = Uri(scheme: "tel", path: phone);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch phone dialer');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +62,6 @@ class _DetailPesanState extends State<DetailPesan> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Gambar menu dalam card rounded
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -62,8 +78,6 @@ class _DetailPesanState extends State<DetailPesan> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Nama & harga
             Text(
               menuList[widget.index].name,
               style: const TextStyle(
@@ -81,10 +95,7 @@ class _DetailPesanState extends State<DetailPesan> {
                 color: Colors.green,
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Input jumlah
             TextField(
               controller: _controller,
               keyboardType: TextInputType.number,
@@ -99,10 +110,7 @@ class _DetailPesanState extends State<DetailPesan> {
                 errorText: _errorText,
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Tombol submit mirip style Gojek
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -128,7 +136,7 @@ class _DetailPesanState extends State<DetailPesan> {
             const SizedBox(height: 20),
 
             // Total harga
-            if (totalHarga > 0)
+            if (totalHarga > 0) ...[
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
@@ -160,6 +168,60 @@ class _DetailPesanState extends State<DetailPesan> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: () {
+                        _launchWhatsApp(
+                          "628979045362",
+                          "Halo, saya mau pesan ${_controller.text} ${menuList[widget.index].name} dengan total Rp $totalHarga",
+                        );
+                      },
+                      icon: const Icon(Icons.call, color: Colors.white),
+                      label: const Text(
+                        "WhatsApp",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: () {
+                        _launchPhone("08979045362");
+                      },
+                      icon: const Icon(Icons.phone, color: Colors.white),
+                      label: const Text(
+                        "Telepon",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ]
           ],
         ),
       ),

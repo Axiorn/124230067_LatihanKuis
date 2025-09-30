@@ -95,23 +95,15 @@ class Homepage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                menuList[index].name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                ),
+                menuList[index].name, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 15, ),
               ),
               const SizedBox(height: 4),
               Text(
-                menuList[index].kategori.join(", "),
-                style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                menuList[index].kategori.join(", "), style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               ),
               const SizedBox(height: 4),
               Text(
-                menuList[index].desc,
-                style: TextStyle(fontSize: 12, color: Colors.grey[500]),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                menuList[index].desc, style: TextStyle(fontSize: 12, color: Colors.grey[500]), maxLines: 2, overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
               Row(
